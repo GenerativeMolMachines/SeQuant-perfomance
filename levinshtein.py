@@ -17,31 +17,21 @@ def _get_positions(sequences: list) -> np.array:
         for j in range(i + 1, len(sequences)):
             distances[i, j] = distance(sequences[i], sequences[j])
             distances[j, i] = distances[i, j]
+    return distances
 
-    mds = MDS(n_components=2, dissimilarity="precomputed", random_state=1)
-    pos = mds.fit_transform(distances)
-    sample = pos[-1]
-    pos = pos[:-2, :]
+def mean_dist(data_name):
+    data_path = root_data + data_name +"_sequant.csv"
+    data = pd.read_csv(data_path)
+    sequences = data['seq'].values.tolist()
+    distances = _get_positions(sequences)
+    print(f"{data_name}: {np.mean(distances)}")
+    with open(f'distances_{data_name}.txt', 'w') as f:
+        for item in sequences:
+            f.write("%s\n" % item)
+    return np.mean(distances)
 
-    k = 2
-    connectivity = kneighbors_graph(pos, n_neighbors=k, include_self=False)
-    model = AgglomerativeClustering(
-        n_clusters=k,
-        linkage='ward',
-        connectivity=connectivity
-    )
-    model.fit(pos)
-    return model, pos, sample
+for name in classification_datasets:
+    mean_dist(name)
 
-data_name = classification_datasets[0]
-
-data_path = root_data + data_name +"_sequant.csv"
-data = pd.read_csv(data_path)
-sequences = data['seq'].values.tolist()
-model, pos, sample = _get_positions(sequences)
-
-with open(f'pos_{data_name}.txt', 'w') as f:
-    for item in sequences:
-        f.write("%s\n" % item)
-
-print(np.mean(pos))
+for name in regression_datasets:
+    mean_dist(name)
