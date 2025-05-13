@@ -26,7 +26,7 @@ def mean_dist(data_name):
     distances = _get_positions(sequences)
     print(f"{data_name}: {np.mean(distances)}")
     with open(f'distances_{data_name}.txt', 'w') as f:
-        for item in sequences:
+        for item in distances:
             f.write("%s\n" % item)
     return np.mean(distances)
 
