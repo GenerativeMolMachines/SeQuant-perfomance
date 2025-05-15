@@ -51,7 +51,7 @@ Each subfolder contains:
 
 ## Processing
 
-The processing directory contains a single .py file that implements the preprocessing pipeline for datasets located in data/benchmark. This pipeline generates all encodings and embeddings investigated in this study, including one-hot, blosum62, threemers encodings, ProtBERT embeddings, and SeQuant embeddings.
+The processing directory contains a single .py file that implements the preprocessing pipeline for datasets located in data/benchmark. This pipeline generates all encodings and embeddings investigated in this study, including one-hot, blosum62, threemers encodings, embeddings obtained using the ProtBERT model [https://doi.org/10.1109/TPAMI.2021.3095381], and SeQuant embeddings.
 
 Due to double-blind review requirements, the SeQuant API section is unavailable as it relies on a resource link that cannot be shared at this stage. To reproduce our results, please comment out this section in the code. All necessary SeQuant embeddings are provided in the data/embeddings_SeQuant directory. For proper execution, move these embeddings to the data/encoded folder.
 
