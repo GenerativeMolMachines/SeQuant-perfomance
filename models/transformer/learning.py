@@ -36,8 +36,8 @@ tf.random.set_seed(42)
 os.environ["KERAS_BACKEND"] = "tensorflow"
 
 # Training data import
-train_df = pd.read_csv('small_train_df.csv')
-test_df = pd.read_csv('small_test_df.csv')
+train_df = pd.read_csv('../../data/learning/small_train_df.csv')
+test_df = pd.read_csv('../../data/learning/small_test_df.csv')
 
 print('Data has been imported\n')
 

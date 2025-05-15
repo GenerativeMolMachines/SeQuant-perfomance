@@ -6,8 +6,6 @@ import sys
 import tensorflow as tf
 import time
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
-
 from preset_tools import (create_dataset_from_batches, oversampling)
 from biLSTM_contrastive import *
 
@@ -38,8 +36,8 @@ np.random.seed(42)
 os.environ["KERAS_BACKEND"] = "tensorflow"
 
 # Training data import
-train_df = pd.read_csv('small_train_df.csv')
-test_df = pd.read_csv('small_test_df.csv')
+train_df = pd.read_csv('../../data/learning/small_train_df.csv')
+test_df = pd.read_csv('../../data/learning/small_test_df.csv')
 
 print('Data has been imported\n')
 

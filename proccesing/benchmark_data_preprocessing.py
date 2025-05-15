@@ -127,24 +127,24 @@ for dataset in datasets:
 
     print(f'Start processing {dataset} dataset')
 
-    df = pd.read_csv(f'data/{dataset}.csv')
+    df = pd.read_csv(f'../data/benchmark/{dataset}.csv')
 
     # One-hot encoding with padding 20
     one_hot_df = process_dataset(df, one_hot_encode, pad_value=0)
-    one_hot_df.to_csv(f'data/encoded/{dataset}_one_hot.csv', index=False)
+    one_hot_df.to_csv(f'../data/encoded/{dataset}_one_hot.csv', index=False)
 
     # Threemers encoding with padding of max threemer index + 1
     threemers_pad_value = len(amino_acids) ** 3
     threemers_df = process_dataset(df, threemers_encode, pad_value=threemers_pad_value)
-    threemers_df.to_csv(f'data/encoded/{dataset}_threemers.csv', index=False)
+    threemers_df.to_csv(f'../data/encoded/{dataset}_threemers.csv', index=False)
 
     # BLOSUM62 encoding with padding 0
     blosum62_df = process_dataset(df, blosum62_encode,  pad_value=0)
-    blosum62_df.to_csv(f'data/encoded/{dataset}_blosum62.csv', index=False)
+    blosum62_df.to_csv(f'../data/encoded/{dataset}_blosum62.csv', index=False)
 
     # ProtBERT encoding with padding 0
     protbert_df = process_bert_dataset(df, lambda seqs: prot_bert_encode_batch(seqs), 'protbert', pad_value=0)
-    protbert_df.to_csv(f'data/encoded/{dataset}_protbert.csv', index=False)
+    protbert_df.to_csv(f'../data/encoded/{dataset}_protbert.csv', index=False)
 
 
 ############################### SeQuant API usage for SeQuant embeddings ###############################
@@ -184,7 +184,7 @@ for dataset in datasets:
 
     final_df = pd.merge(df, df_fin_data, on='seq', how='inner')
 
-    final_df.to_csv(f'data/encoded/{dataset}_sequant.csv', index=False)
+    final_df.to_csv(f'../data/encoded/{dataset}_sequant.csv', index=False)
 
 
 ############################### Adding physicochemical properties to regression dataset  ###############################
@@ -208,7 +208,7 @@ for encoding in encodings:
 
     print(f'Start processing {encoding} dataset')
 
-    df = pd.read_csv(f'data/encoded/regression_{encoding}.csv')
+    df = pd.read_csv(f'../data/encoded/regression_{encoding}.csv')
     
     properties_test = df['seq'].progress_apply(compute_properties).apply(pd.Series)
     result_test = pd.concat([df, properties_test], axis=1)
@@ -217,5 +217,5 @@ for encoding in encodings:
         test_target = result_test.drop(columns=[t for t in targets if t != target])
         test_target = test_target.rename(columns={target: 'target'})
 
-        test_target.to_csv(f'data/encoded/{target}_{encoding}.csv', index=False)
+        test_target.to_csv(f'../data/encoded/{target}_{encoding}.csv', index=False)
 

@@ -37,8 +37,8 @@ tf.random.set_seed(2022)
 os.environ["KERAS_BACKEND"] = "tensorflow"
 
 # Loading balanced datasets
-small_test_df = pd.read_csv('data/small_test_df.csv')
-small_train_df = pd.read_csv('data/small_train_df.csv')
+small_test_df = pd.read_csv('../../data/learning/small_test_df.csv')
+small_train_df = pd.read_csv('../../data/learning/small_train_df.csv')
 
 train_data = list(small_train_df['sequence'])
 test_data = list(small_test_df['sequence'])
