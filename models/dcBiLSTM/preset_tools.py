@@ -22,7 +22,7 @@ def make_monomer_descriptors(monomer_dict: dict[str, str]) -> pd.DataFrame:
     scaled_array = sc.fit_transform(descriptors_set)
     descriptors_set = pd.DataFrame(scaled_array, columns=descriptor_names, index=monomer_dict.keys())
 
-    energy_data = pd.read_csv('../../data/learning/energy_data.csv')
+    energy_data = pd.read_csv('../data/learning/energy_data.csv')
     energy_set = energy_data.set_index("Aminoacid").iloc[:, :]
 
     energy_names = energy_set.columns

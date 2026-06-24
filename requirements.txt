@@ -1,0 +1,28 @@
+# For GPU: PyTorch wheels below target CUDA 12.1; use CPU wheels if no GPU.
+
+--extra-index-url https://download.pytorch.org/whl/cu121
+
+# Core numerics and utilities
+numpy==1.26.4
+pandas==2.2.3
+scipy==1.15.2
+scikit-learn==1.6.1
+tqdm==4.67.1
+matplotlib==3.10.1
+Levenshtein==0.27.3
+
+# SeQuant autoencoder training and embedding extraction
+tensorflow==2.10.1
+rdkit==2023.9.6
+
+# Benchmarking downstream models
+xgboost==3.0.0
+
+# PLM encodings
+torch==2.5.1+cu121
+transformers==4.48.1
+esm==3.2.1
+ankh==1.10.0
+biopython==1.85
+p2smi==1.1.1
+SmilesPE==0.0.3
